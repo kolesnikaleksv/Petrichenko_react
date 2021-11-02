@@ -19,7 +19,7 @@ import './App.css';
 //when a class component is called, it create its instance:<WhoAmI/>
 //To pass a props to class instances, we need to create a constructor
 		// constructor(props) {
-// So we cat use 'props', we prescribe keyword 'super' and pass 'props'
+// So we can use 'props', we prescribe keyword 'super' and pass 'props'
 			// super(props);
 //Now this.props appear in every instance
 		// }
@@ -135,3 +135,63 @@ import './App.css';
 	}
 
 export default App;
+
+// The task from teacher on the codepan is complete
+class App extends React.Component {
+	constructor(props) {
+	  super(props);
+	  this.state = {
+		counter: this.props.counter
+	  }
+	}
+	
+	incr = () => {
+	  if(this.state.counter < 50) {
+		 this.setState( {
+		 counter: this.state.counter + 1
+	  });
+	  } 
+	}
+	decr = () => {
+	  if(this.state.counter > -50) {
+		this.setState({
+		  counter: this.state.counter - 1
+		});
+	  }
+	}
+	getRandom = () => {
+	   let randomNum = Math.floor(Math.random() * (50 - -50)) + -50;
+	  this.setState({
+		counter: randomNum
+	  })
+	}
+	getReset = () => {
+	  this.setState({
+		counter: this.props.counter
+	  })
+	}
+	// Используйте только стрелочную форму методов
+	// Почему? Подробный ответ будет в следующем уроке
+	
+	render() {
+	  const {counter} = this.state;
+	  return (
+		<div class="app">
+		  <div class="counter">{counter}</div>
+		  <div class="controls">
+			<button onClick={this.incr}>INC</button>
+			<button onClick={this.decr} >DEC</button>
+			<button onClick={this.getRandom} >RND</button>
+			<button onClick={this.getReset} >RESET</button>
+		  </div>
+		</div>
+	  )
+	}
+  }
+  
+  ReactDOM.render(<App counter={10}/>, document.getElementById('app'));
+  
+  // 1) Начальное значение счетчика должно передаваться через props
+  // 2) INC и DEC увеличивают и уменьшают счетчик соответственно на 1. Без ограничений, но можете добавить границу в -50/50. По достижению границы ничего не происходит
+  // 3) RND изменяет счетчик в случайное значение от -50 до 50. Конструкцию можете прогуглить за 20 секунд :) Не зависит от предыдущего состояния
+  // 4) RESET сбрасывает счетчик в 0 или в начальное значение из пропсов. Выберите один из вариантов
