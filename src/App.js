@@ -2,147 +2,134 @@ import React from 'react';
 import { Component } from 'react';
 import './App.css';
 
-//All components start with a capital letter 
-//Component are functions that can return JSX elements
-// It may be a regular function or an arrow functions
-	// const Header = () => {
-	// 	return <h1>Hello world!</h1>
-	// }
+// Components state
+// state in the classes
 
-	// const Field = () => {
-	// 	return <input placeholder="write here" type="text"/>
-	// }
-
-	// function Button() {
-	// 	const text = 'log in'
-// We can call functions inside the curly braces
-		// function res() {
-		// 	return 'log in';
-		// }
-		// return <button>{res()}</button>
-		// return <button>{text}</button>
-//inside the element we can put other elements
-	// 	const p = <p>log in</p>
-	// 	return <button>{p}</button>
-
-	// }
-// We can use conditions inside the curly braces
-
-		// function Button() {
-		// 	const text = 'log in';
-		// 	const loaded = false;
-		// 	return <button>{loaded ? text : 'Enter'}</button>
-		// }
-// We can't use the "if/else" construction
-		
-	// const Field = () => {
-	// 	const holder = 'Enter here';
-	// 	const styledField = {
-	// 		width: '300px'
-	// 	};
-//The long attribute is written to the column
-	// 	return <input 
-	// 	placeholder={holder} 
-	// 	type="text" 
-	// 	style={styledField} />
-	// }
-//Components used to be classes but now they are functions
-//But classes must be ingerited from some kind of components
-//There should be only one main method inside the class: render
-	// class Field extends React.Component{
-	// 	render() {
-	// 		const holder = 'Enter here';
-	// 		const styledField = {
-	// 			width: '300px'
-	// 		};
-//And when we need to return something that we wrote: return			
-	// 		return <input 
-	// 		placeholder={holder} 
-	// 		type="text" 
-	// 		style={styledField} />
-	// 	}
-	// }
-
-	// function App() {
-	// return (
-	// 	<div className="App">
-	// 		<Header />
-	// 		<Field />
-	// 		<Button />
-	// 	</div>
-	// );
-	// }
-// We can do named import
-	// export {Header};
-	// export default App;
-
-//Component properties
-
-//props are object
-
-	// function WhoAmI(props) {
-	// 	return(
-	// 		<div>
-	// 			<h1>My name is {props.name}, surname - {props.surname}</h1>
-	// 			<a href={props.link}>My profile</a>
-	// 		</div>
-	// 	)
-	// }
-//This object can be immediately destructured
 	// function WhoAmI({name, surname, link}) {
 	// 	return(
 	// 		<div>
-	// 			<h1>My name is {name}, surname - {surname}</h1>
+	// 			<h1>My name is {name()}, surname - {surname}</h1>
 	// 			<a href={link}>My profile</a>
 	// 		</div>
 	// 	)
 	// }
-
-
-	// function App() {
-	// 	return (
-	// 		<div className="App">
-//{/* name,surname and link -this is the props.	 */}
-//{/* These values are not muttable, they are read-only */}
-	// 			<WhoAmI name='John' surname='Smith' link='facebook.com' />
-	// 			<WhoAmI name='Alex' surname='Smoothy' link='linkedin.com' />
-	// 		</div>
-	// 	);
+//let's rewrite our function into a class
+//We will also see how to 'props' works inside class component
+	// class WhoAmI extends Component {
+//when a class component is called, it create its instance:<WhoAmI/>
+//To pass a props to class instances, we need to create a constructor
+		// constructor(props) {
+// So we cat use 'props', we prescribe keyword 'super' and pass 'props'
+			// super(props);
+//Now this.props appear in every instance
+		// }
+//We do not need an empty constructor and can be deleted
+//but if there are additional props in it, it can be returned
+		// constructor(props) {
+		// 	super(props);
+//we can't to change read-only 'props',
+// but we can create state and changed it
+	// 		this.state = {
+	// 			years: 28
+	// 		}
+	// 	}
+	// 	render() {
+	// 		const {name, surname, link} = this.props;
+	// 		return(
+	// 			<div>
+	// 				<h1>My name is {name}, surname - {surname} age={this.state.years}</h1>
+	// 				<a href={link}>My profile</a>
+	// 			</div>
+	// 		)
+	// 	}
 	// }
 
-//anything and even object can be passet to the props
-// 	function WhoAmI({name, surname, link}) {
-// 		return(
-// 			<div>
-// 				<h1>My name is {name.firstName}, surname - {surname}</h1>
-// {/* //but we can't pass the object to the page.  */}
-// 				<h1>My name is {name}, surname - {surname}</h1>
-// 				<a href={link}>My profile</a>
-// 			</div>
-// 		)
+//create a button with the event
+//create a method to change the state	
+	// class WhoAmI extends Component {
+	// 	constructor(props) {
+	// 		super(props);
+	// 		this.state = {
+	// 			years: 28
+	// 		}
+	// 	}
+// create a method nextYear
+//It should be an arrow function
+		// nextYear = () => {
+		// 	console.log('+++');
+		// } 
+//How to change the 'state' state correctly
+//'state' cannot be changed directly like this:
+	// nextYear = () => {
+	// 	console.log('+++');
+	// 	this.state.years++//You can't do that !!!!!
+	// } 
+// 	nextYear = () => {
+// 		console.log('+++');
+// 		this.setState({
+// //This way we also change the state directly
+// 			years: ++this.state.years// you can't do that !!!
+// 		})
 // 	}
-// 	function App() {
-// 		return (
-// 			<div className="App">
-// 				<WhoAmI name={{firstName: 'John'}} surname='Smith' link='facebook.com' />
-// 				<WhoAmI name={{firstName: 'Alex'}} surname='Smoothy' link='linkedin.com' />
-// 			</div>
-// 		);
-// 	}
-//Now we pass a function to the props
-	function WhoAmI({name, surname, link}) {
+//Now the right way
+	// nextYear = () => {
+	// 	console.log('+++');
+	// 	this.setState({
+	// 		years: this.state.years + 1
+	// 	})
+	// }
+//To make this code asynchronous we need to pass there a callback function
+	// 	nextYear = () => {
+	// 		console.log('+++');
+	// 		this.setState(state => ({
+	// 			years: state.years + 1 // we need to remove 'this.'
+	// 		}))
+	// 	}
+	// 	render() {
+	// 		const {name, surname, link} = this.props;
+	// 		return(
+	// 			<div>
+	// 				<button onClick={this.nextYear}>click here</button>
+	// 				<h1>My name is {name}, surname - {surname} age={this.state.years}</h1>
+	// 				<a href={link}>My profile</a>
+	// 			</div>
+	// 		)
+	// 	}
+	// }
+
+//If we have several properties, the setState function will only
+//change what it was told, the rest of the states will remain intact
+	class WhoAmI extends Component {
+		constructor(props) {
+			super(props);
+			this.state = {
+				years: 28,
+				text: 'click here'
+			}
+		}
+
+	nextYear = () => {
+		// console.log('+++');
+		this.setState(state => ({
+			years: state.years + 1 
+		}))
+	}
+	render() {
+		const {name, surname, link} = this.props;
 		return(
 			<div>
-				<h1>My name is {name()}, surname - {surname}</h1>
+				<button onClick={this.nextYear}>{this.state.text}</button>
+				<h1>My name is {name}, surname - {surname} age={this.state.years}</h1>
 				<a href={link}>My profile</a>
 			</div>
 		)
 	}
+}
 	function App() {
 		return (
 			<div className="App">
-				<WhoAmI name={() => {return 'John'}} surname='Smith' link='facebook.com' />
-				<WhoAmI name={() => {return 'Alex'}} surname='Smoothy' link='linkedin.com' />
+				<WhoAmI name='John' surname='Smith' link='facebook.com' />
+				<WhoAmI name='Alex' surname='Smoothy' link='linkedin.com' />
 			</div>
 		);
 	}
