@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+// import { Component, Fragment } from 'react';
 import './App.css';
 
 //Events in React
@@ -120,7 +121,33 @@ import './App.css';
 		const {name, surname, link} = this.props;
 		const {years, position} = this.state;
 		return(
-			<div>
+			// <div>
+			// 	<button onClick={this.nextYear}>{this.state.text}</button>
+			// 	<h1>My name is {name}, 
+			// 		surname - {surname},  
+			// 		age - {years},  
+			// 		position - {position} </h1>
+			// 	<a href={link}>My profile</a>
+			// 	<form >
+			// 		<span>Written here</span>
+			// 		<input onChange={(e) => {this.CommitInputChange(e, 'some text')}} />
+			// 	</form>
+			// </div>
+//So we can avoid unnecessary div
+			// <Fragment>
+			//  	<button onClick={this.nextYear}>{this.state.text}</button>
+			//  	<h1>My name is {name}, 
+			//  		surname - {surname},  
+			//  		age - {years},  
+			//  		position - {position} </h1>
+			//  	<a href={link}>My profile</a>
+			//  	<form >
+			//  		<span>Written here</span>
+			//  		<input onChange={(e) => {this.CommitInputChange(e, 'some text')}} />
+			//  	</form>
+			//  </Fragment>
+//or an empty tag
+			<>
 				<button onClick={this.nextYear}>{this.state.text}</button>
 				<h1>My name is {name}, 
 					surname - {surname},  
@@ -131,7 +158,7 @@ import './App.css';
 					<span>Written here</span>
 					<input onChange={(e) => {this.CommitInputChange(e, 'some text')}} />
 				</form>
-			</div>
+			</>
 		)
 	}
 	}
