@@ -28,6 +28,27 @@ import {Button} from './App';
     // }
 
 //or we can change styles
+  // import styled from 'styled-components';
+  // const BigButton = styled(Button)`
+  //   margin: 0 auto;
+  //   width: 245px;
+  // `;
+  // ReactDOM.render(
+  //     <StrictMode>
+  //       <App />
+  //       {/* <Button/> */}
+  //       {/* <BigButton>Click here</BigButton> */}
+  //       <BigButton as="a">Click here</BigButton>{/* this is the link now */}
+  //     </StrictMode>,
+  //   document.getElementById('root')
+  // );
+
+  //Ready-made the libraries with styles and components
+  // Bootstrap: https://react-bootstrap.github.io/getting-started/introduction
+  //npm install react-bootstrap bootstrap@5.1.3 --save
+  //import
+  import 'bootstrap/dist/css/bootstrap.min.css';
+  import BootstrapTest from './BootstrapTest';
   import styled from 'styled-components';
   const BigButton = styled(Button)`
     margin: 0 auto;
@@ -39,6 +60,8 @@ import {Button} from './App';
         {/* <Button/> */}
         {/* <BigButton>Click here</BigButton> */}
         <BigButton as="a">Click here</BigButton>{/* this is the link now */}
+        <BootstrapTest/>
       </StrictMode>,
     document.getElementById('root')
   );
+//One more react-library: https://mui.com/getting-started/usage/
