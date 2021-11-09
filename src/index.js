@@ -2,6 +2,7 @@ import React,{StrictMode} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {Button} from './App';
 
 // StrictMode is similar in functionality to 'use strict'
 // impot React,{StrictMode} from 'react';
@@ -26,10 +27,18 @@ import App from './App';
     //     );
     // }
 
-
-ReactDOM.render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  document.getElementById('root')
-);
+//or we can change styles
+  import styled from 'styled-components';
+  const BigButton = styled(Button)`
+    margin: 0 auto;
+    width: 245px;
+  `;
+  ReactDOM.render(
+      <StrictMode>
+        <App />
+        {/* <Button/> */}
+        {/* <BigButton>Click here</BigButton> */}
+        <BigButton as="a">Click here</BigButton>{/* this is the link now */}
+      </StrictMode>,
+    document.getElementById('root')
+  );
