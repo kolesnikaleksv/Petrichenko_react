@@ -277,9 +277,25 @@ import './App.css';
 			</div>
 		)
 	}
+//Specialization and inheritance
+//Let's create a new component that will return piece of layout
+//In fact, we made a specific component based on another component
+	const HelloGreating = () => {
+		return (
+			<div style={{'width': '600px', 'margin': '0 auto'}} >
+				<DynamicGreating color={'primary'} >
+					<h2>Specialization is better than inheritance</h2>
+					<h2>Hello world !</h2>
+				</DynamicGreating>
+			</div>
+		)
+	}
+//Why is composition better than inheritanse? - Because React has all the convenion
+//methods for using compositions and there is simply no need for inheritance.
 		function App() {
 		return (
 			<Wrapper className="App">
+				<HelloGreating/>
 				<DynamicGreating color={'primary'} >
 					<h2>This week was hard</h2>
 					<h2>Hello world !</h2>
