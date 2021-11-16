@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
 // import { Component, Fragment } from 'react';
+import InsertPropsChildren from './InsertPropsChildren';
 import './App.css';
 
 //Events in React
@@ -257,11 +258,51 @@ import './App.css';
 		width: 600px;
 		margin: 80px auto 0 auto;
 	`;
+//inserting elements through props.children
+//documentation: https://ru.reactjs.org/docs/react-api.html#reactchildren
+//Let's create a component DynamicGreating
+	const DynamicGreating = (props) => {
+		return (
+			<div className={'mb-3 p-3 border border-' + props.color}>
+{/* We have to insert something here */}
+				{/* {props.children} */}
+{/* We can call the map method, but we have to import the react */}
+				{
+					React.Children.map(props.children, child => {
+// We cannot modify the elements, so we can clone these elements and them modify them
+						return React.cloneElement(child, {className: 'shadow p-3 m-3 border rounded'});
+
+					})
+				}
+			</div>
+		)
+	}
 		function App() {
 		return (
 			<Wrapper className="App">
+				<DynamicGreating color={'primary'} >
+					<h2>This week was hard</h2>
+					<h2>Hello world !</h2>
+				</DynamicGreating>
+{/* In this way we pass our child to the right and left column */}
+				<InsertPropsChildren
+					right = {
+						<DynamicGreating color={'primary'} >
+							<h2>This week was hard</h2>
+							<h2>Hello world !</h2>
+						</DynamicGreating>
+					}
+					left = {
+						<DynamicGreating color={'primary'} >
+							<h2>Right column</h2>
+							<h2>Hello world !</h2>
+						</DynamicGreating>
+					}
+// By combining both of these methods we get a powerfull tool
+				/>
+
 				<WhoAmI name='John' surname='Smith' link='facebook.com' />
-				<WhoAmI name='Alex' surname='Smoothy' link='linkedin.com' />
+				<WhoAmI name='Alex' surname='Smoothy' link='linkedin.com' />				
 			</Wrapper>
 		);
 	}
