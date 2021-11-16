@@ -292,9 +292,58 @@ import './App.css';
 	}
 //Why is composition better than inheritanse? - Because React has all the convenion
 //methods for using compositions and there is simply no need for inheritance.
+	
+
+//Render-props pattern
+//Through the props we can call not only the component but also its parts. 
+//for example method render(in class component) or return(in functional component) or
+// parts thereof
+//Let's create a one function component and one class component
+//They are both independent components
+//We will make it so that the Message component is inside the Counter component 
+// and use it 'state'
+	const Message = (props) => {
+		return (
+			<h2>
+				The counter is {props.counter}
+			</h2>
+		)
+	}
+
+	class Counter extends Component {
+		state = {
+			counter: 0
+		}
+		changeCounter = () => {
+			this.setState(({counter}) => ({
+				counter: counter + 1
+			}))
+		}
+		render() {
+			return (
+				<>
+					<button
+						className={'btn btn-primary'}
+						onClick={this.changeCounter} >
+						Click me
+					</button>
+					{/* <Message counter={this.state.counter} />  //We will not do so. we dont want to hard bind this component */}
+					{this.props.render(this.state.counter)}
+					{this.props.render(this.state.counter)}
+				</>
+			)
+		}
+	}
+// So now we can pass multiple function with props and we can double them
+// and we can call them in different places 
 		function App() {
 		return (
 			<Wrapper className="App">
+
+				<Counter render={counter => (
+					<Message counter={counter} />
+				)} />
+
 				<HelloGreating/>
 				<DynamicGreating color={'primary'} >
 					<h2>This week was hard</h2>
